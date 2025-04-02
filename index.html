@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carro e caminhão</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+</head>
+<body>
+    <h1>Garagem Virtual</h1>
+
+    <h2>Carro Esportivo</h2>
+    <label for="modeloEsportivo">Modelo:</label>
+    <input type="text" id="modeloEsportivo" value="Dogde"><br><br>
+    <label for="corEsportivo">Cor:</label>
+    <input type="text" id="corEsportivo" value="Preto"><br><br>
+    <button onclick="criarCarroEsportivo()">Criar Carro Esportivo</button><br><br>
+
+
+    <div id="carroEsportivoInfo">
+        <img id="carroEsportivoImagem"
+            src="img/florian-schneider-799KfBloSFQ-unsplash-scaled-removebg-preview.png"
+            alt="Carro Esportivo">
+        <p>Status: <span id="carroEsportivoStatus"></span></p>
+        <progress id="carroEsportivoVelocidade" value="0" max="200"></progress>
+        <span id="carroEsportivoVelocidadeValor">0 km/h</span>
+        <br><br>
+        <button onclick="ligarCarroEsportivo()" class="btn-ligar">Ligar</button>
+        <button onclick="desligarCarroEsportivo()" class="btn-desligar">Desligar</button>
+        <button onclick="acelerarCarroEsportivo()" class="btn-acelerar">Acelerar</button>
+        <button onclick="frearCarroEsportivo()" class="btn-frear">Frear</button>
+        <button onclick="buzinarCarroEsportivo()" class="btn-buzinar">Buzinar</button>
+        <button onclick="ativarTurbo()" class="btn-turbo">Ativar Turbo</button>
+        <br><br>
+    </div>
+
+    <h2>Caminhão</h2>
+    <label for="modeloCaminhao">Modelo:</label>
+    <input type="text" id="modeloCaminhao" value="Volvo"><br><br>
+    <label for="corCaminhao">Cor:</label>
+    <input type="text" id="corCaminhao" value="Azul"><br><br>
+    <label for="capacidadeCarga">Capacidade de Carga (kg):</label>
+    <input type="number" id="capacidadeCarga" value="10000"><br><br>
+    <button onclick="criarCaminhao()">Criar Caminhão</button><br><br>
+
+
+    <div id="caminhaoInfo">
+        <img id="caminhaoImagem"
+            src="img/caminhao-de-reboque-com-carrinho-brinquedo-infantil-colorido_222693-removebg-preview.png"
+            alt="Caminhão">
+        <p>Status: <span id="caminhaoStatus"></span></p>
+        <progress id="caminhaoVelocidade" value="0" max="120"></progress>
+        <span id="caminhaoVelocidadeValor">0 km/h</span>
+        <p>Carga Atual: <span id="caminhaoCargaAtual">0 kg</span> / <span id="caminhaoCapacidadeCarga">10000 kg</span>
+        </p>
+        <br><br>
+        <button onclick="ligarCaminhao()" class="btn-ligar">Ligar</button>
+        <button onclick="desligarCaminhao()" class="btn-desligar">Desligar</button>
+        <button onclick="acelerarCaminhao()" class="btn-acelerar">Acelerar</button>
+        <button onclick="frearCaminhao()" class="btn-frear">Frear</button>
+        <button onclick="buzinarCaminhao()" class="btn-buzinar">Buzinar</button>
+        <br><br>
+        <label for="quantidadeCarga">Quantidade a Carregar (kg):</label>
+        <input type="number" id="quantidadeCarga" value="1000"><br><br>
+        <button onclick="carregarCaminhao()">Carregar</button><br><br>
+    </div>
+
+    <div id="alert-container"></div>
+
+    <!-- Audio elements -->
+    <audio id="audioBuzina" src="assets/audio/buzina.mp3" preload="auto"></audio>
+    <audio id="audioAceleracao" src="assets/audio/aceleracao.mp3" preload="auto"></audio>
+    <audio id="audioFrenagem" src="assets/audio/frenagem.mp3" preload="auto"></audio>
+    <audio id="audioLigar" src="assets/audio/ligar.mp3" preload="auto"></audio>
+    <audio id="audioDesligar" src="assets/audio/desligar.mp3" preload="auto"></audio>
+    <audio id="audioTurbo" src="assets/audio/turbo.mp3" preload="auto"></audio>
+
+    <label for="volume">Volume:</label>
+    <input type="range" id="volume" min="0" max="1" step="0.1" value="0.5">
+
+    <h1>Gerenciador de Frota e Manutenção</h1>
+
+    <div id="notificacoes" class="notificacoes-container"></div>
+
+    <div class="container">
+        <!-- Seção para Adicionar Veículos -->
+        <section class="form-section">
+            <h2>Adicionar Novo Veículo</h2>
+            <form id="form-add-veiculo">
+                <label for="tipo-veiculo">Tipo:</label>
+                <select id="tipo-veiculo" required>
+                    <option value="" disabled selected>Selecione o tipo</option>
+                    <option value="CarroEsportivo">Carro Esportivo</option>
+                    <option value="Caminhao">Caminhão</option>
+                </select>
+
+                <label for="marca">Marca:</label>
+                <input type="text" id="marca" required>
+
+                <label for="modelo">Modelo:</label>
+                <input type="text" id="modelo" required>
+
+                <label for="ano">Ano:</label>
+                <input type="number" id="ano" required min="1900" max="2099">
+
+                <!-- Campos específicos do tipo de veículo (serão exibidos/ocultados via JS) -->
+                <div id="campos-carro" class="campos-especificos">
+                    <label for="num-portas">Número de Portas:</label>
+                    <input type="number" id="num-portas" min="2">
+                </div>
+                <div id="campos-carro-esportivo" class="campos-especificos">
+                    <label for="vel-maxima">Velocidade Máxima (km/h):</label>
+                    <input type="number" id="vel-maxima" min="100">
+                </div>
+                <div id="campos-caminhao" class="campos-especificos">
+                    <label for="cap-carga">Capacidade de Carga (Ton):</label>
+                    <input type="number" id="cap-carga" step="0.1" min="0">
+                </div>
+
+                <button type="submit">Adicionar Veículo</button>
+            </form>
+        </section>
+
+        <!-- Seção para Agendar Manutenção -->
+        <section class="form-section">
+            <h2>Agendar Manutenção</h2>
+            <form id="form-agendar-manutencao">
+                <label for="veiculo-select">Veículo:</label>
+                <select id="veiculo-select" required>
+                    <option value="" disabled selected>Selecione um veículo</option>
+                    <!-- Opções serão preenchidas via JS -->
+                </select>
+
+                <label for="data-manutencao">Data e Hora:</label>
+                <input type="datetime-local" id="data-manutencao" class="flatpickr" required> <!-- Use flatpickr ou type="datetime-local" -->
+
+                <label for="tipo-servico">Tipo de Serviço:</label>
+                <input type="text" id="tipo-servico" required>
+
+                <label for="custo-manutencao">Custo (R$):</label>
+                <input type="number" id="custo-manutencao" step="0.01" min="0" required>
+
+                <label for="descricao-manutencao">Descrição (Opcional):</label>
+                <textarea id="descricao-manutencao" rows="3"></textarea>
+
+                <button type="submit">Agendar/Registrar Manutenção</button>
+            </form>
+             <p><small>Obs: Manutenções com datas futuras são agendamentos. Datas passadas são registros históricos.</small></p>
+        </section>
+    </div>
+
+     <hr>
+
+     <!-- Seção de Agendamentos Futuros -->
+    <section class="display-section">
+        <h2>Agendamentos Futuros</h2>
+        <div id="lista-agendamentos" class="lista-items">
+             <!-- Agendamentos serão listados aqui -->
+             <p>Nenhum agendamento futuro.</p>
+        </div>
+    </section>
+
+     <hr>
+
+    <!-- Seção para Listar Veículos e Histórico -->
+    <section class="display-section">
+        <h2>Garagem de Veículos</h2>
+        <div id="lista-veiculos" class="lista-items">
+            <!-- Veículos e seus históricos serão listados aqui -->
+            <p>Nenhum veículo na garagem.</p>
+        </div>
+    </section>
+
+
+    <script src="script.js"></script>
+</body>
+</html>

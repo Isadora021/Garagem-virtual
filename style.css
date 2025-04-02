@@ -1,0 +1,307 @@
+body {
+  font-family: sans-serif;
+  text-align: center; /* Centraliza o conteúdo horizontalmente */
+}
+
+h1, h2 {
+  text-align: center;
+}
+
+label {
+  display: inline-block;
+  width: 150px;
+  text-align: right;
+  margin-right: 10px;
+}
+
+input[type="text"], input[type="number"] {
+  width: 200px;
+  padding: 5px;
+  margin-bottom: 5px;
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+}
+
+#carroEsportivoInfo, #caminhaoInfo {
+  margin-top: 20px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  display: inline-block; /* Permite centralizar com text-align */
+}
+
+p {
+  margin: 5px 0;
+}
+
+#carroEsportivoInfo img, #caminhaoInfo img {
+  margin-bottom: 10px;
+  border: 1px solid #ccc; /* Adiciona uma borda */
+  display: block; /* Evita que a imagem fique alinhada à esquerda */
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Status indicators */
+.ligado {
+  color: green;
+}
+
+.desligado {
+  color: red;
+}
+
+/* Alerts */
+#alert-container {
+  color: red;
+  margin-top: 10px;
+}
+
+.alert {
+  border: 1px solid red;
+  background-color: #ffe6e6;
+  padding: 10px;
+  margin-bottom: 5px;
+  border-radius: 5px;
+}
+
+/* Cores dos botões */
+.btn-ligar {
+  background-color: #4CAF50; /* Verde */
+  color: white;
+}
+
+/* Cores dos botões */
+.btn-ligar {
+  background-color: #4CAF50; /* Verde */
+  color: white;
+}
+
+.btn-desligar {
+  background-color: #f44336; /* Vermelho */
+  color: white;
+}
+
+.btn-acelerar {
+  background-color: #2196F3; /* Azul */
+  color: white;
+}
+
+.btn-frear {
+  background-color: #ff9800; /* Laranja */
+  color: white;
+}
+
+.btn-buzinar {
+  background-color: #9c27b0; /* Roxo */
+  color: white;
+}
+
+.btn-turbo {
+  background-color: #e91e63; /* Rosa */
+  color: white;
+}
+
+button {
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+  margin-right: 5px;
+  margin-left: 5px; /* Adiciona margem à esquerda */
+  border-radius: 5px; /* Adiciona bordas arredondadas */
+}
+
+button:hover {
+  opacity: 0.8; /* Diminui a opacidade no hover */
+}
+
+/* Estilo da barra de progresso (velocidade) */
+progress {
+  -webkit-appearance: none; /* Remove estilos padrão do navegador (Chrome, Safari) */
+  appearance: none; /* Remove estilos padrão do navegador (Firefox, Edge) */
+  width: 100%; /* Ocupa toda a largura do container */
+  height: 10px; /* Define a altura da barra */
+  border-radius: 5px; /* Arredonda as bordas */
+}
+
+/* Estilo da barra de progresso para navegadores Chrome e Safari */
+progress::-webkit-progress-bar {
+  background-color: #f0f0f0; /* Cor de fundo da barra */
+  border-radius: 5px;
+}
+
+progress::-webkit-progress-value {
+  background-color: #2196F3; /* Azul */
+  border-radius: 5px;
+}
+
+/* Estilo da barra de progresso para navegadores Firefox */
+progress::-moz-progress-bar {
+  background-color: #2196F3; /* Azul */
+  border-radius: 5px;
+}
+
+body {
+  font-family: sans-serif;
+  line-height: 1.6;
+  margin: 20px;
+  background-color: #f4f4f4;
+}
+
+h1, h2 {
+  color: #333;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+hr {
+  margin: 30px 0;
+  border: 0;
+  border-top: 1px solid #ccc;
+}
+
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+  justify-content: space-around;
+  margin-bottom: 30px;
+}
+
+.form-section, .display-section {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  flex: 1;
+  min-width: 300px; /* Evita que fiquem muito estreitos */
+}
+
+.form-section form label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+  color: #555;
+}
+
+.form-section form input[type="text"],
+.form-section form input[type="number"],
+.form-section form input[type="datetime-local"],
+.form-section form select,
+.form-section form textarea {
+  width: calc(100% - 22px); /* Ajusta padding/border */
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box; /* Inclui padding e border na largura total */
+}
+/* Estilo específico para o datepicker se usar */
+.form-section form input.flatpickr {
+   width: calc(100% - 22px);
+   background-color: white; /* Garante fundo branco */
+}
+
+.form-section form button {
+  background-color: #5cb85c;
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+}
+
+.form-section form button:hover {
+  background-color: #4cae4c;
+}
+
+.campos-especificos {
+  display: none; /* Oculto por padrão */
+  padding-left: 15px;
+  border-left: 3px solid #eee;
+  margin-bottom: 15px;
+}
+
+/* Listagem de itens */
+.lista-items {
+  margin-top: 15px;
+}
+
+.veiculo-card, .agendamento-item, .historico-item {
+  background-color: #e9e9e9;
+  padding: 15px;
+  margin-bottom: 15px;
+  border-radius: 5px;
+  border-left: 5px solid #5cb85c; /* Verde para item geral */
+}
+
+.agendamento-item {
+   border-left-color: #f0ad4e; /* Laranja para agendamentos */
+}
+
+.veiculo-card h3 {
+  margin-top: 0;
+  margin-bottom: 10px;
+  color: #337ab7;
+}
+
+.veiculo-card p, .agendamento-item p, .historico-item p {
+  margin: 5px 0;
+}
+
+.veiculo-card strong {
+  color: #333;
+}
+
+.veiculo-card .historico-manutencao h4 {
+  margin-top: 15px;
+  margin-bottom: 8px;
+  color: #555;
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 3px;
+}
+
+.veiculo-card .historico-manutencao ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+.veiculo-card .historico-manutencao li {
+  background-color: #fdfdfd;
+  padding: 8px;
+  margin-bottom: 5px;
+  border-radius: 3px;
+  font-size: 0.9em;
+  border: 1px solid #eee;
+}
+
+/* Notificações */
+.notificacoes-container {
+  position: fixed;
+  top: 10px;
+  right: 10px;
+  z-index: 1000;
+  width: 300px;
+}
+
+.notificacao {
+  padding: 15px;
+  margin-bottom: 10px;
+  border-radius: 4px;
+  color: #fff;
+  opacity: 0.9;
+  transition: opacity 0.5s ease-out;
+}
+
+.notificacao.info { background-color: #31708f; }
+.notificacao.sucesso { background-color: #3c763d; }
+.notificacao.erro { background-color: #a94442; }
+.notificacao.aviso { background-color: #8a6d3b; }
+
+/* Estilo para data passada no histórico */
+.historico-passado {
+  /* Pode adicionar um estilo para diferenciar visualmente, ex: cor mais clara */
+   opacity: 0.8;
+}
