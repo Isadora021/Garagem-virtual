@@ -3,176 +3,148 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Carro e caminhão</title>
+    <title>Gerenciador de veiculos</title>
     <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
 </head>
 <body>
-    <h1>Garagem Virtual</h1>
+    <div class="app-container">
+        <!-- Barra de Navegação Lateral -->
+        <nav id="sidebar">
+            <div class="sidebar-header">
+                <h3>Menu</h3>
+            </div>
+            <ul class="list-unstyled components">
+                <li><a href="#" data-target="garage-view"><i class="icon icon-garage"></i> Garagem</a></li>
+                <li><a href="#" data-target="add-vehicle-view"><i class="icon icon-add"></i> Adicionar Veículo</a></li>
+                <li><a href="#" data-target="schedule-view"><i class="icon icon-schedule"></i> Agendar Manutenção</a></li>
+                <!-- O Histórico será acessado a partir da Garagem -->
+            </ul>
+        </nav>
 
-    <h2>Carro Esportivo</h2>
-    <label for="modeloEsportivo">Modelo:</label>
-    <input type="text" id="modeloEsportivo" value="Dogde"><br><br>
-    <label for="corEsportivo">Cor:</label>
-    <input type="text" id="corEsportivo" value="Preto"><br><br>
-    <button onclick="criarCarroEsportivo()">Criar Carro Esportivo</button><br><br>
-
-
-    <div id="carroEsportivoInfo">
-        <img id="carroEsportivoImagem"
-            src="img/florian-schneider-799KfBloSFQ-unsplash-scaled-removebg-preview.png"
-            alt="Carro Esportivo">
-        <p>Status: <span id="carroEsportivoStatus"></span></p>
-        <progress id="carroEsportivoVelocidade" value="0" max="200"></progress>
-        <span id="carroEsportivoVelocidadeValor">0 km/h</span>
-        <br><br>
-        <button onclick="ligarCarroEsportivo()" class="btn-ligar">Ligar</button>
-        <button onclick="desligarCarroEsportivo()" class="btn-desligar">Desligar</button>
-        <button onclick="acelerarCarroEsportivo()" class="btn-acelerar">Acelerar</button>
-        <button onclick="frearCarroEsportivo()" class="btn-frear">Frear</button>
-        <button onclick="buzinarCarroEsportivo()" class="btn-buzinar">Buzinar</button>
-        <button onclick="ativarTurbo()" class="btn-turbo">Ativar Turbo</button>
-        <br><br>
-    </div>
-
-    <h2>Caminhão</h2>
-    <label for="modeloCaminhao">Modelo:</label>
-    <input type="text" id="modeloCaminhao" value="Volvo"><br><br>
-    <label for="corCaminhao">Cor:</label>
-    <input type="text" id="corCaminhao" value="Azul"><br><br>
-    <label for="capacidadeCarga">Capacidade de Carga (kg):</label>
-    <input type="number" id="capacidadeCarga" value="10000"><br><br>
-    <button onclick="criarCaminhao()">Criar Caminhão</button><br><br>
-
-
-    <div id="caminhaoInfo">
-        <img id="caminhaoImagem"
-            src="img/caminhao-de-reboque-com-carrinho-brinquedo-infantil-colorido_222693-removebg-preview.png"
-            alt="Caminhão">
-        <p>Status: <span id="caminhaoStatus"></span></p>
-        <progress id="caminhaoVelocidade" value="0" max="120"></progress>
-        <span id="caminhaoVelocidadeValor">0 km/h</span>
-        <p>Carga Atual: <span id="caminhaoCargaAtual">0 kg</span> / <span id="caminhaoCapacidadeCarga">10000 kg</span>
-        </p>
-        <br><br>
-        <button onclick="ligarCaminhao()" class="btn-ligar">Ligar</button>
-        <button onclick="desligarCaminhao()" class="btn-desligar">Desligar</button>
-        <button onclick="acelerarCaminhao()" class="btn-acelerar">Acelerar</button>
-        <button onclick="frearCaminhao()" class="btn-frear">Frear</button>
-        <button onclick="buzinarCaminhao()" class="btn-buzinar">Buzinar</button>
-        <br><br>
-        <label for="quantidadeCarga">Quantidade a Carregar (kg):</label>
-        <input type="number" id="quantidadeCarga" value="1000"><br><br>
-        <button onclick="carregarCaminhao()">Carregar</button><br><br>
-    </div>
-
-    <div id="alert-container"></div>
-
-    <!-- Audio elements -->
-    <audio id="audioBuzina" src="assets/audio/buzina.mp3" preload="auto"></audio>
-    <audio id="audioAceleracao" src="assets/audio/aceleracao.mp3" preload="auto"></audio>
-    <audio id="audioFrenagem" src="assets/audio/frenagem.mp3" preload="auto"></audio>
-    <audio id="audioLigar" src="assets/audio/ligar.mp3" preload="auto"></audio>
-    <audio id="audioDesligar" src="assets/audio/desligar.mp3" preload="auto"></audio>
-    <audio id="audioTurbo" src="assets/audio/turbo.mp3" preload="auto"></audio>
-
-    <label for="volume">Volume:</label>
-    <input type="range" id="volume" min="0" max="1" step="0.1" value="0.5">
-
-    <h1>Gerenciador de Frota e Manutenção</h1>
-
-    <div id="notificacoes" class="notificacoes-container"></div>
-
-    <div class="container">
-        <!-- Seção para Adicionar Veículos -->
-        <section class="form-section">
-            <h2>Adicionar Novo Veículo</h2>
-            <form id="form-add-veiculo">
-                <label for="tipo-veiculo">Tipo:</label>
-                <select id="tipo-veiculo" required>
-                    <option value="" disabled selected>Selecione o tipo</option>
-                    <option value="CarroEsportivo">Carro Esportivo</option>
-                    <option value="Caminhao">Caminhão</option>
-                </select>
-
-                <label for="marca">Marca:</label>
-                <input type="text" id="marca" required>
-
-                <label for="modelo">Modelo:</label>
-                <input type="text" id="modelo" required>
-
-                <label for="ano">Ano:</label>
-                <input type="number" id="ano" required min="1900" max="2099">
-
-                <!-- Campos específicos do tipo de veículo (serão exibidos/ocultados via JS) -->
-                <div id="campos-carro" class="campos-especificos">
-                    <label for="num-portas">Número de Portas:</label>
-                    <input type="number" id="num-portas" min="2">
+        <!-- Conteúdo Principal -->
+        <main id="main-content">
+            <!-- Seção da Garagem -->
+            <section id="garage-view" class="content-section active">
+                <h2><i class="icon icon-garage"></i> Minha Garagem</h2>
+                <div id="vehicle-list" class="vehicle-grid">
+                    <!-- Veículos serão carregados aqui pelo JavaScript -->
+                    <p>Nenhum veículo cadastrado ainda.</p>
                 </div>
-                <div id="campos-carro-esportivo" class="campos-especificos">
-                    <label for="vel-maxima">Velocidade Máxima (km/h):</label>
-                    <input type="number" id="vel-maxima" min="100">
-                </div>
-                <div id="campos-caminhao" class="campos-especificos">
-                    <label for="cap-carga">Capacidade de Carga (Ton):</label>
-                    <input type="number" id="cap-carga" step="0.1" min="0">
+            </section>
+
+            <!-- Seção de Adicionar Veículo -->
+            <section id="add-vehicle-view" class="content-section">
+                <h2><i class="icon icon-add"></i> Adicionar Novo Veículo</h2>
+                <form id="add-vehicle-form" class="form-layout">
+                    <div class="form-group">
+                        <label for="make">Marca:</label>
+                        <input type="text" id="make" name="make" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="model">Modelo:</label>
+                        <input type="text" id="model" name="model" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="year">Ano:</label>
+                        <input type="number" id="year" name="year" min="1900" max="2099" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="plate">Placa:</label>
+                        <input type="text" id="plate" name="plate" required pattern="[A-Za-z]{3}-?[0-9][A-Za-z0-9][0-9]{2}" title="Formato AAA-1234 ou AAA1B34">
+                    </div>
+                     <div class="form-group">
+                        <label for="vin">VIN (Opcional):</label>
+                        <input type="text" id="vin" name="vin">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Salvar Veículo</button>
+                    <div class="error-message" id="add-vehicle-error"></div>
+                </form>
+            </section>
+
+            <!-- Seção de Agendar Manutenção -->
+            <section id="schedule-view" class="content-section">
+                <h2><i class="icon icon-schedule"></i> Agendar Manutenção</h2>
+                <form id="schedule-maintenance-form" class="form-layout">
+                    <div class="form-group">
+                        <label for="schedule-vehicle">Veículo:</label>
+                        <select id="schedule-vehicle" name="vehicleId" required>
+                            <option value="">Selecione um veículo</option>
+                            <!-- Opções carregadas pelo JavaScript -->
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="service-type">Tipo de Serviço:</label>
+                        <input type="text" id="service-type" name="serviceType" required list="service-suggestions">
+                         <datalist id="service-suggestions">
+                            <option value="Troca de Óleo">
+                            <option value="Revisão Geral">
+                            <option value="Alinhamento e Balanceamento">
+                            <option value="Troca de Pneus">
+                            <option value="Freios">
+                        </datalist>
+                    </div>
+                    <div class="form-group">
+                        <label for="schedule-date">Data Preferida:</label>
+                        <input type="date" id="schedule-date" name="scheduleDate" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="notes">Observações:</label>
+                        <textarea id="notes" name="notes" rows="3"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Agendar</button>
+                     <div class="success-message" id="schedule-success"></div>
+                    <div class="error-message" id="schedule-error"></div>
+                </form>
+            </section>
+
+             <!-- Seção de Detalhes do Veículo e Histórico -->
+            <section id="vehicle-detail-view" class="content-section">
+                <button class="btn btn-secondary btn-back" data-target="garage-view">< Voltar para Garagem</button>
+                <h2 id="detail-vehicle-name">Detalhes do Veículo</h2>
+                <div id="vehicle-details-content" class="vehicle-details">
+                    <!-- Detalhes carregados aqui -->
                 </div>
 
-                <button type="submit">Adicionar Veículo</button>
-            </form>
-        </section>
+                <h3><i class="icon icon-history"></i> Histórico de Manutenção</h3>
+                <button id="add-maintenance-entry-btn" class="btn btn-success btn-small">Adicionar Registro</button>
+                <div id="maintenance-history-list">
+                    <p>Nenhum histórico de manutenção para este veículo.</p>
+                    <!-- Histórico carregado aqui -->
+                </div>
 
-        <!-- Seção para Agendar Manutenção -->
-        <section class="form-section">
-            <h2>Agendar Manutenção</h2>
-            <form id="form-agendar-manutencao">
-                <label for="veiculo-select">Veículo:</label>
-                <select id="veiculo-select" required>
-                    <option value="" disabled selected>Selecione um veículo</option>
-                    <!-- Opções serão preenchidas via JS -->
-                </select>
+                <!-- Formulário para Adicionar Registro de Manutenção (inicialmente oculto) -->
+                <form id="add-maintenance-form" class="form-layout hidden">
+                    <h4>Novo Registro de Manutenção</h4>
+                     <input type="hidden" id="maintenance-vehicle-id"> <!-- Para saber a qual veículo adicionar -->
+                    <div class="form-group">
+                        <label for="maint-date">Data:</label>
+                        <input type="date" id="maint-date" required>
+                    </div>
+                     <div class="form-group">
+                        <label for="maint-service">Serviço Realizado:</label>
+                        <input type="text" id="maint-service" required>
+                    </div>
+                     <div class="form-group">
+                        <label for="maint-cost">Custo (R$):</label>
+                        <input type="number" id="maint-cost" step="0.01" min="0">
+                    </div>
+                     <div class="form-group">
+                        <label for="maint-notes">Observações:</label>
+                        <textarea id="maint-notes" rows="2"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-small">Salvar Registro</button>
+                    <button type="button" id="cancel-add-maintenance" class="btn btn-secondary btn-small">Cancelar</button>
+                    <div class="error-message" id="add-maintenance-error"></div>
+                </form>
+            </section>
 
-                <label for="data-manutencao">Data e Hora:</label>
-                <input type="datetime-local" id="data-manutencao" class="flatpickr" required> <!-- Use flatpickr ou type="datetime-local" -->
+            <!-- Área para Mensagens Globais/Confirmações -->
+            <div id="global-message" class="message-area"></div>
 
-                <label for="tipo-servico">Tipo de Serviço:</label>
-                <input type="text" id="tipo-servico" required>
-
-                <label for="custo-manutencao">Custo (R$):</label>
-                <input type="number" id="custo-manutencao" step="0.01" min="0" required>
-
-                <label for="descricao-manutencao">Descrição (Opcional):</label>
-                <textarea id="descricao-manutencao" rows="3"></textarea>
-
-                <button type="submit">Agendar/Registrar Manutenção</button>
-            </form>
-             <p><small>Obs: Manutenções com datas futuras são agendamentos. Datas passadas são registros históricos.</small></p>
-        </section>
+        </main>
     </div>
-
-     <hr>
-
-     <!-- Seção de Agendamentos Futuros -->
-    <section class="display-section">
-        <h2>Agendamentos Futuros</h2>
-        <div id="lista-agendamentos" class="lista-items">
-             <!-- Agendamentos serão listados aqui -->
-             <p>Nenhum agendamento futuro.</p>
-        </div>
-    </section>
-
-     <hr>
-
-    <!-- Seção para Listar Veículos e Histórico -->
-    <section class="display-section">
-        <h2>Garagem de Veículos</h2>
-        <div id="lista-veiculos" class="lista-items">
-            <!-- Veículos e seus históricos serão listados aqui -->
-            <p>Nenhum veículo na garagem.</p>
-        </div>
-    </section>
-
 
     <script src="script.js"></script>
+
 </body>
 </html>
